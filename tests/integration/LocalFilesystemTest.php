@@ -3,12 +3,13 @@
 namespace Abc\Filesystem;
 
 use Gaufrette\Adapter\Local;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Filesystem\Filesystem as LocalFilesystem;
 
 /**
  * @author Hannes Schulz <schulz@daten-bahn.de>
  */
-class LocalFilesystemTest extends \PHPUnit_Framework_TestCase
+class LocalFilesystemTest extends TestCase
 {
     /** @var Filesystem */
     protected $subject;
@@ -17,7 +18,7 @@ class LocalFilesystemTest extends \PHPUnit_Framework_TestCase
     /** @var string */
     private $fixtureDir;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->fixtureDir = dirname(__FILE__) . '/../fixtures/test-directory';
         $this->path       = dirname(__FILE__) . '/../../build/unit/filesystem';
@@ -35,7 +36,7 @@ class LocalFilesystemTest extends \PHPUnit_Framework_TestCase
         $this->subject = $this->createFilesystem($this->path);
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         /*if(is_dir($this->path))
         {
@@ -51,20 +52,17 @@ class LocalFilesystemTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Abc\Filesystem\Filesystem', $filesystem);
     }
 
-
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testCreateClientThrowsInvalidArgumentException()
     {
+        $this->expectException('\InvalidArgumentException');
+
         $this->subject->createFilesystem('foobar');
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testUploadThrowsInvalidArgumentException()
     {
+        $this->expectException('\InvalidArgumentException');
+
         $this->subject->upload('/path/to/nowhere', 'nowhere');
     }
 
@@ -97,11 +95,10 @@ class LocalFilesystemTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(file_get_contents($path), file_get_contents($expectedCopiedFile));
     }
 
-    /**
-     * @expectedException \Gaufrette\Exception\FileAlreadyExists
-     */
     public function testUploadWithFileThrowsExceptionIfFileExists()
     {
+        $this->expectException('\Gaufrette\Exception\FileAlreadyExists');
+
         $filename = 'foobar.txt';
 
         $localFilesystem = new LocalFilesystem();
@@ -196,11 +193,10 @@ class LocalFilesystemTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(file_exists($this->path . '/foobar/foobar.txt'));
     }
 
-    /**
-     * @expectedException \Gaufrette\Exception\FileNotFound
-     */
     public function testDownloadThrowsFileNotFoundException()
     {
+        $this->expectException('\Gaufrette\Exception\FileNotFound');
+
         $subject = $this->createFilesystem($this->fixtureDir);
 
         $subject->download('unknown', $this->path);

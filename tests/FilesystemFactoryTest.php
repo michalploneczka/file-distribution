@@ -1,22 +1,26 @@
 <?php
 
+namespace Abc\Filesystem\Tests;
+
 use Abc\Filesystem\AdapterFactoryInterface;
 use Abc\Filesystem\Definition;
 use Abc\Filesystem\FilesystemFactory;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @author Hannes Schulz <schulz@daten-bahn.de>
  */
-class FilesystemFactoryTest extends PHPUnit_Framework_TestCase
+class FilesystemFactoryTest extends TestCase
 {
-    /** @var AdapterFactoryInterface|\PHPUnit_Framework_MockObject_MockObject */
+    /** @var AdapterFactoryInterface|MockObject */
     private $adapterFactory;
     /** @var FilesystemFactory */
     private $subject;
 
-    public function setUp()
+    protected function setUp(): void
     {
-        $this->adapterFactory = $this->getMock('Abc\Filesystem\AdapterFactoryInterface');
+        $this->adapterFactory = $this->createMock('Abc\Filesystem\AdapterFactoryInterface');
         $this->subject = new FilesystemFactory($this->adapterFactory);
     }
 
@@ -32,4 +36,3 @@ class FilesystemFactoryTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Abc\Filesystem\Filesystem', $filesystem);
     }
 }
- 

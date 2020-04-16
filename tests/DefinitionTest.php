@@ -1,16 +1,18 @@
 <?php
 
+namespace Abc\Filesystem\Tests;
 
 use Abc\Filesystem\Definition;
 use JMS\Serializer\SerializerBuilder;
 use JMS\Serializer\SerializerInterface;
+use PHPUnit\Framework\TestCase;
 
-class DefinitionTest extends PHPUnit_Framework_TestCase
+class DefinitionTest extends TestCase
 {
     /** @var SerializerInterface */
     protected $serializer;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->serializer = SerializerBuilder::create()->build();
     }

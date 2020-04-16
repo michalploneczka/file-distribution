@@ -1,15 +1,17 @@
 <?php
+
 namespace Abc\Filesystem\Tests;
 
 use Abc\Filesystem\AdapterFactory;
 use Abc\Filesystem\FilesystemType;
+use PHPUnit\Framework\TestCase;
 
-class AdapterFactoryTest extends \PHPUnit_Framework_TestCase
+class AdapterFactoryTest extends TestCase
 {
     /** @var AdapterFactory */
     protected $subject;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->subject = new AdapterFactory();
@@ -25,19 +27,17 @@ class AdapterFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Gaufrette\Adapter', $filesystem);
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testCreateAdapterThrowsInvalidArgumentExceptionForUnsupportedTypes()
     {
+        $this->expectException('\InvalidArgumentException');
+
         $this->subject->create('foobar', '/path/to/nowhere');
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testCreateThrowsInvalidArgumentExceptionIfFtpHostIsEmpty()
     {
+        $this->expectException('\InvalidArgumentException');
+
         $filesystem = $this->subject->create(FilesystemType::FTP, '/foobar');
     }
 

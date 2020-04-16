@@ -1,13 +1,15 @@
 <?php
 
+namespace Abc\Filesystem\Tests;
 
 use Abc\Filesystem\DefinitionFactory;
 use Abc\Filesystem\FilesystemType;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @author Hannes Schulz <schulz@daten-bahn.de>
  */
-class DefinitionFactoryTest extends PHPUnit_Framework_TestCase
+class DefinitionFactoryTest extends TestCase
 {
 
     /**
@@ -47,4 +49,3 @@ class DefinitionFactoryTest extends PHPUnit_Framework_TestCase
         );
     }
 }
- 
