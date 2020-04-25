@@ -25,7 +25,7 @@
     "require": {
         "php": ">=7.1",
         "psr/log": "^1.1",
-        "symfony/filesystem": "^3.4",
+        "symfony/filesystem": "^3.4|^4.0",
         "knplabs/gaufrette": "^0.9",
         "jms/serializer": "^3.0",
         "myclabs/php-enum": "~1.7"
